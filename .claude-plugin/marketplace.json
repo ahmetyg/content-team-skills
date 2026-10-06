@@ -1,0 +1,15 @@
+{
+  "name": "content-team-skills",
+  "description": "Skills für das Copywriting- & Content-Team.",
+  "owner": {
+    "name": "ahmetyg"
+  },
+  "plugins": [
+    {
+      "name": "content-team-skills",
+      "source": "./",
+      "description": "Claude-Code-Skills für das Copywriting- & Content-Team im Gesundheitsbereich.",
+      "version": "0.1.0"
+    }
+  ]
+}
