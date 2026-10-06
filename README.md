@@ -58,6 +58,21 @@ Sprachmodelle ändern sich, und Skills werden angepasst. Damit dabei nichts unbe
    ```
    Der Lauf vergleicht automatisch mit und ohne Skill und zeigt, ob alle Fälle noch bestehen.
 
-   **Letzter Lauf (6. Oktober 2026, Version 0.1.0):** 6 von 6 Testfällen bestanden, jeder Fall dreimal ausgeführt. Mit Skill liegt die Quote bei 100 %, ohne Skill bei 44 %. Ohne Skill findet Claude zwar oft die gleichen Probleme, liefert aber weder einheitliche Ampel-Bewertungen noch den Hinweis auf die Rechtsprüfung. Genau diese Einheitlichkeit braucht ein Team.
+   **So wird bewertet:** Jeder Testfall hat 2 bis 3 Prüfungen. Es gibt zwei Arten:
+   - **Feste Textprüfungen**, zum Beispiel „Steht der Rechtshinweis drin?" oder „Meldet der Skill beim sauberen Text 0 kritische Funde?".
+   - **Inhaltliche Prüfungen** durch ein zweites Modell (Claude Haiku) als Gutachter. Es prüft jede Antwort gegen eine Liste konkreter Punkte und stimmt dreimal ab. Die Mehrheit entscheidet.
+
+   Ein Testfall gilt als bestanden, wenn in allen drei Durchläufen alle Prüfungen bestehen.
+
+   **Letzter Lauf:** am 6. Oktober 2026 mit Version 0.1.0, Claude Code 2.1.291 und Claude Opus. Er dauerte 91 Sekunden und kostete 3,44 USD.
+
+   | | mit Skill | ohne Skill |
+   |---|---|---|
+   | Inhalt: Probleme richtig erkannt (Gutachter) | 12 von 12 | 10 von 12 |
+   | Ampel-Format und Rechtshinweis (feste Prüfung) | 21 von 21 | 0 von 21 |
+   | Darf-nicht-anspringen-Fall | 3 von 3 | 3 von 3 |
+   | **Gesamtquote** (Durchschnitt der Testfälle) | **100 %** | **44 %** |
+
+   **Ehrlich gelesen:** Die 44 % kommen vor allem daher, dass Claude ohne Skill weder das Ampel-Format noch den Rechtshinweis liefert. Inhaltlich ist Claude auch ohne Skill gut. Der Skill macht die Ergebnisse vor allem einheitlich, vergleichbar und vorsichtig. Einen klaren inhaltlichen Unterschied gab es beim Kongress-Text: Ohne Skill hat Claude dort in 2 von 3 Durchläufen Punkte übersehen.
 2. **Review.** Änderungen am Skill kommen als Pull Request. Eine zweite Person schaut drauf, bevor sie live gehen.
 3. **Versionierung.** Jede Version hat eine Nummer ([`plugin.json`](.claude-plugin/plugin.json)) und einen Eintrag im [`CHANGELOG.md`](CHANGELOG.md). Geht etwas schief, lässt sich die vorige Version zurückholen.
